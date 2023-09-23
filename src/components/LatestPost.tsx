@@ -4,7 +4,9 @@ import React from "react";
 import { format, parseISO } from "date-fns";
  
 export async function LatesPost() {
-  const res = await fetch(`${process.env.latestBlog}`);
+  const res = await fetch(
+    `${process.env.latestBlog}`,
+    { next: {revalidate: 10} });
   const latestBlog = await res.json();
   const blog = latestBlog.data[latestBlog.data.length - 1];
 
